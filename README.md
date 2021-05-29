@@ -28,3 +28,14 @@ Finally you'll be asked for the MFA code itself.
 The script will parse or create an `.aws/credentials` file in your home directory, then it'll add
 (or update) an `[mfa]` section with the temporary credentials to it... and that's it. Now you can
 simply use the `mfa` profile when using AWS CLI and other scripts.
+
+## update-ip.rb
+
+Updates your public IP on a security group. Assumes the security group is used for 22, 80 and 443 ports,
+and all your entries have the same description (e.g. `usename-public-ip`).
+
+Usage:
+
+```sh
+ruby update-ip.rb security-group-name your-ip-description
+```
