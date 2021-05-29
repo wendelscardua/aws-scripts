@@ -11,7 +11,7 @@ Usage:
 $ ruby aws-mfa.rb
 ```
 
-This will use your current credentials (usually from  default profile, but you can change
+This will use your current credentials (usually from default profile, but you can change
 this via AWS_PROFILE environment variable) to fetch your current user id, aws account and
 arn. These will be shown for confirmation.
 
@@ -27,7 +27,8 @@ Finally you'll be asked for the MFA code itself.
 
 The script will parse or create an `.aws/credentials` file in your home directory, then it'll add
 (or update) an `[mfa]` section with the temporary credentials to it... and that's it. Now you can
-simply use the `mfa` profile when using AWS CLI and other scripts.
+simply use the `mfa` profile when using AWS CLI and other scripts. Remember to set any `.aws/config`
+options for the `[mfa]` section as well if needed (e.g. `region`).
 
 ## update-ip.rb
 
