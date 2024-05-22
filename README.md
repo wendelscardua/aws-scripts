@@ -32,8 +32,7 @@ options for the `[mfa]` section as well if needed (e.g. `region`).
 
 ## update-ip.rb
 
-Updates your public IP on a security group. Assumes the security group is used for 22, 80 and 443 ports,
-and all your entries have the same description (e.g. `usename-public-ip`).
+Updates your public IP on a security group. Assumes all your entries have the same description (e.g. `usename-public-ip`).
 
 Usage:
 
