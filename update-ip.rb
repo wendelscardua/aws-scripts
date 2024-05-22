@@ -6,6 +6,9 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
 
+  gem 'base64'
+  gem 'bigdecimal'
+  gem 'ox'
   gem 'aws-sdk-ec2'
   gem 'pry'
 end
