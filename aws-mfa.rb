@@ -7,7 +7,10 @@ gemfile do
   source 'https://rubygems.org'
 
   gem 'aws-sdk-sts'
+  gem 'base64'
+  gem 'bigdecimal'
   gem 'dotini'
+  gem 'ox'
   gem 'pry'
 end
 
