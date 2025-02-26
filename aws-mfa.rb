@@ -2,7 +2,8 @@
 # frozen_string_literal: true
 
 def usage
-  puts 'aws-mfa.rb [--arn-name|-n <arn-name>] [--duration|-d <seconds>] [--no-confirm|-Y] [--token|-t <otp-code>]'
+  puts 'aws-mfa.rb [--arn-name|-n <arn-name>] [--duration|-d <seconds>] [--no-confirm|-Y] [--token|-t <otp-code>] '
+  puts '           [--profile|-p <profile>]'
   puts 'aws-mfa.rb --help|-h'
 end
 
@@ -20,6 +21,7 @@ arn_name = nil
 duration = nil
 no_confirm = false
 token_code = nil
+profile = 'mfa'
 
 while ARGV.any?
   arg = ARGV.shift
@@ -51,6 +53,12 @@ while ARGV.any?
   when /\A(--token|-t)\z/
     token_code = ARGV.shift
     usage! if token_code.nil?
+  when /\A(--profile|-p)=/
+    profile = arg.gsub(/^(--profile|-p)=/, '')
+    usage! if profile.nil?
+  when /\A(--profile|-p)\z/
+    profile = ARGV.shift
+    usage! if profile.nil?
   else
     usage!
   end
@@ -124,10 +132,10 @@ credentials_ini = if File.exist?(credentials_file)
                     Dotini::IniFile.new
                   end
 
-credentials_ini['mfa']['aws_access_key_id'] = response.credentials.access_key_id
-credentials_ini['mfa']['aws_secret_access_key'] = response.credentials.secret_access_key
-credentials_ini['mfa']['aws_session_token'] = response.credentials.session_token
-credentials_ini['mfa']['expiration'] = response.credentials.expiration
+credentials_ini[profile]['aws_access_key_id'] = response.credentials.access_key_id
+credentials_ini[profile]['aws_secret_access_key'] = response.credentials.secret_access_key
+credentials_ini[profile]['aws_session_token'] = response.credentials.session_token
+credentials_ini[profile]['expiration'] = response.credentials.expiration
 
 File.open(credentials_file, 'wb') do |file|
   credentials_ini.write(file)
