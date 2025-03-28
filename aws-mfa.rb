@@ -2,8 +2,11 @@
 # frozen_string_literal: true
 
 def usage
-  puts 'aws-mfa.rb [--arn-name|-n <arn-name>] [--duration|-d <seconds>] [--no-confirm|-Y] [--token|-t <otp-code>] '
+  puts 'aws-mfa.rb [--arn-name|-n <arn-name>]'
+  puts '           [--duration|-d <seconds>]'
+  puts '           [--no-confirm|-Y]'
   puts '           [--profile|-p <profile>]'
+  puts '           [--token|-t <otp-code>]'
   puts 'aws-mfa.rb --help|-h'
 end
 

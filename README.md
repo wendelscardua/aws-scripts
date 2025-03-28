@@ -9,7 +9,7 @@ Adds (or updates) temporary mfa credentials to your `.aws/credentials` file.
 Usage:
 
 ```sh
-$ ruby aws-mfa.rb [--arn-name|-n <arn-name>] [--duration|-d <seconds>] [--no-confirm|-Y] [--token|-t <otp-code>]
+$ ruby aws-mfa.rb [--arn-name|-n <arn-name>] [--duration|-d <seconds>] [--no-confirm|-Y] [--profile|-p <profile>] [--token|-t <otp-code>]
 ```
 
 This will use your current credentials (usually from default profile, but you can change
@@ -26,10 +26,13 @@ value is 900 (= 15 minutes).
 
 Finally you'll be asked for the MFA code itself.
 
-The script will parse or create an `.aws/credentials` file in your home directory, then it'll add
-(or update) an `[mfa]` section with the temporary credentials to it... and that's it. Now you can
-simply use the `mfa` profile when using AWS CLI and other scripts. Remember to set any `.aws/config`
-options for the `[mfa]` section as well if needed (e.g. `region`).
+The script will parse or create an `.aws/credentials` file in your home
+directory, then it'll add (or update) a section corresponding to the MFA
+profile (which is different from your regular user profile – see the arguments
+below) with the temporary credentials to it... and that's it. Now you can
+simply use the MFA profile when using AWS CLI and other scripts. Remember
+to set any `.aws/config` options for the section corresponding to the MFA
+profile as well if needed (e.g. `region`).
 
 Arguments:
 
@@ -44,6 +47,9 @@ Arguments:
   used.
 
 - `--no-confirm` / `-Y`: use this to skip arn confirmation.
+
+- `--profile <profile>` / `-p <profile>`: the name of the MFA profile to use,
+  `mfa` if omitted.
 
 - `--token <otp-code>` / `-t <otp-code>`: the OTP token code for MFA
   authentication. Using this will prevent the script from asking it.
