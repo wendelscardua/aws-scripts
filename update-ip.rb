@@ -78,6 +78,7 @@ puts "Will replace #{old_cidr_ip} with #{new_cidr_ip}"
 
 permissions = web_accessible.ip_permissions
                             .map { |perm| [perm.from_port, perm.to_port, perm.ip_ranges.select { |range| range.description == description }.map(&:cidr_ip)] }
+                            .reject { |from_port, to_port, old_cidr_ips| old_cidr_ips.empty? }
 
 permissions.each do |from_port, to_port, old_cidr_ips|
   old_cidr_ips.each do |old_cidr_ip|
